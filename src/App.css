@@ -1,0 +1,136 @@
+body{
+  background: linear-gradient(#e66465, #9198e5);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  font-family: 'Arial', sans-serif;
+}
+
+.add-todo-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-field, .due-date-field {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.due-date-field {
+  padding: 17px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.add-button {
+  background-color: #2ecc71;
+  color: #fff;
+  font-size: 18px;
+  width: 100%;
+  height: 100%; /* Set a fixed height */
+  padding: 0 20px; /* Adjust padding to center text vertically */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #27ae60;
+  }
+}
+
+.todo-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.checkbox {
+  margin-right: 15px;
+}
+
+.checkbox input {
+  cursor: pointer;
+  appearance: none; /* Remove default styles */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.checkbox input:checked {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.checkbox input:checked::before {
+  content: '\2713'; /* Checkmark symbol */
+  font-size: 14px;
+  color: #fff;
+  display: block;
+  text-align: center;
+  line-height: 20px;
+}
+
+.todo-text {
+  font-size: 18px;
+  color: #333;
+  flex-grow: 1;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.delete-button {
+  margin-left: 10px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #c0392b;
+  }
+}
+
+
