@@ -1,0 +1,12 @@
+/* ToDoItem.css */
+
+.todo-item {
+    /* Your existing styles */
+  }
+  
+  .due-date {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #888;
+  }
+  
