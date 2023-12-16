@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = ({ onSignUp }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [gender, setGender] = useState('');
+  const navigate = useNavigate();
 
   const handleSignUp = async () => {
 
-    const response = await fetch('http://localhost:3001/api/register', {
+    const response = await fetch('http://localhost:3003/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, phoneNumber, gender })
     });
+
+    if (response.ok) {
+      onSignUp();
+      navigate('/todolist');
+    } else {
+      console.log("Sign up failed");
+      // Handle sign-up failure
+    }
 
     console.log("Response received:", response);
 

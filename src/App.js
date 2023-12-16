@@ -1,16 +1,14 @@
-// App.js - Main container for the application
 import React, { useState } from 'react';
-import ToDoList from './ToDoList';
-import Snackbar from './Snackbar';
-import './ToDoItem.css';
+import ToDoList from './pages/Todo/ToDoList';
+import Snackbar from './pages/Snackbar/Todo/Snackbar'
+import './pages/Todo/ToDoItem.css';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
-import SignUp from './SignUp'; // Import SignUp component
-import Login from './Login'; // Import Login component
-// App.js - Import FontAwesome components and icons
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { BrowserRouter as Router, Route, Routes,Navigate, Outlet, Link } from 'react-router-dom';
+import SignUp from './pages/Register/SignUp'; 
+import Login from './pages/Login/Login'; 
+import { useNavigate } from 'react-router-dom';
 
 
 const App = () => {
@@ -21,34 +19,23 @@ const App = () => {
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [loggedIn, setLoggedIn] = useState(false); // Add authentication state
 
+  const [showSignUp, setShowSignUp] = useState(false); 
+  let navigate = useNavigate();
+
   const handleSignUp = () => {
-    // Implement your signup logic here
-    // Set loggedIn to true when signup is successful
     setLoggedIn(true);
+    navigate('/todolist');
   };
 
   const handleLogin = () => {
-    // Implement your login logic here
-    // Set loggedIn to true when login is successful
     setLoggedIn(true);
   };
 
-  const handleLogout = () => {
-    // Implement logout logic here
-    // Set loggedIn to false when the user logs out
-    setLoggedIn(false);
-  };
+  // const handleLogout = () => {
+  //   setLoggedIn(false);
+  // };
 
   // Render the appropriate component based on authentication state
-  if (!loggedIn) {
-    return (
-      <div className="app">
-        <SignUp onSignUp={handleSignUp} />
-        <Login onLogin={handleLogin} />
-      </div>
-    );
-  }
-
   const addToDo = () => {
     if (newToDoText.trim() !== '') {
       const newToDo = {
@@ -95,9 +82,34 @@ const App = () => {
     setSnackbarMessage('');
   };
 
+  if (!loggedIn) {
+    return (
+      <Routes>
+        <Route path="/" element={<Login onLogin={handleLogin} />} />
+        <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
+      </Routes>
+    );
+  }
+
+  // return (
+  //   <Router>
+  //     <Routes>
+  //       <Route path="/todolist" element={<ToDoList items={toDos} toggleToDo={toggleToDo} deleteToDo={deleteToDo} />} />
+  //       <Route path="*" element={<Navigate replace to="/todolist" />} />
+  //     </Routes>
+  //   </Router>
+  // );
+
+
   return (
+
     <div className="app">
-      <div className="add-todo-container">
+      <Routes>
+        <Route path="/todolist" element={<ToDoList items={toDos} toggleToDo={toggleToDo} deleteToDo={deleteToDo} />} />
+        <Route path="*" element={<Navigate replace to="/todolist" />} />
+      </Routes>
+
+    <div className="add-todo-container">
         <div className="input-container">
           <input
             className="input-field"
@@ -121,6 +133,7 @@ const App = () => {
       <ToDoList items={toDos} toggleToDo={toggleToDo} deleteToDo={deleteToDo} />
       {showSnackbar && <Snackbar message={snackbarMessage} onClose={closeSnackbar} />}
     </div>
+      
   );
 };
 
